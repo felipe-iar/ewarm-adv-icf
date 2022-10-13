@@ -146,27 +146,43 @@ place at address mem:__ICFEDIT_intvec_start__ { readonly section .intvec };
 //  place in IROM_region  { readonly };
 //}
 
-define block ro_blkX { ro section .usingX,
-                       ro object funx.o };
-                       
-define block ro_blkY {  ro section .usingY,
-                        ro object funy.o };
-                        
-define block ro_blkZ {  ro section .usingZ,
-                        ro object funz.o };
-                        
-define block ro_others { ro } except { ro object fun*.o };
+define block ro_blkX_slot with
+alignment = 1k,
+end alignment = 1k,
+fixed order {
+  ro section .blkX_start,
+  ro object funx.o,
+  ro section .blkX_end };
 
-place in IROM_region { block ro_others,
-                       block ro_blkX,
-                       block ro_blkY,
-                       block ro_blkZ,
-                        };
+define block ro_blkY_slot with
+alignment = 1k,
+end alignment = 1k,
+fixed order {
+  ro section .blkY_start,
+  ro object funy.o,
+  ro section .blkY_end };
+  
+define block ro_blkZ_slot with
+alignment = 1k,
+end alignment = 1k,
+fixed order {
+  ro section .blkZ_start,
+  ro object funz.o,
+  ro section .blkZ_end };
 
-//if (!isempty(EROM_region))
-//{
-//  place in EROM_region  { readonly section application_specific_ro };
-//}
+define block ALL_RO with fixed order {
+  ro,
+  block ro_blkX_slot,
+  block ro_blkY_slot,
+  block ro_blkZ_slot,
+};
+
+place in IROM_region { block ALL_RO };
+
+if (!isempty(EROM_region))
+{
+  place in EROM_region  { readonly section application_specific_ro };
+}
 
 if (!isempty(IRAM_region))
 {
