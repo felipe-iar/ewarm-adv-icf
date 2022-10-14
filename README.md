@@ -18,7 +18,7 @@ https://github.com/felipe-iar/ewarm-adv-icf/blob/7cd9fc8c52418c7cd0d7e59084eb04e
 - From the application, now it is possible to refer to the block boundaries. Example using macros:
 https://github.com/felipe-iar/ewarm-adv-icf/blob/7cd9fc8c52418c7cd0d7e59084eb04e898844109/main.c#L8-L11
 
-One simple example:
+- One simple example:
 https://github.com/felipe-iar/ewarm-adv-icf/blob/7cd9fc8c52418c7cd0d7e59084eb04e898844109/main.c#L16-L21
 
 <details> <summary>Output example (click to unfold)</summary>
